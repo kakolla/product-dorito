@@ -9,16 +9,10 @@ function Navbar() {
         <div className="navbar-left">
           <Link to="/" className="navbar-logo">
             <div className="logo-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3 3h18v18H3z"/>
-              </svg>
+              <img style={{marginTop: -5}} height="35px" src="public/riot.png"></img>
             </div>
-            <span className="logo-text">RIOT GAMES</span>
           </Link>
           <button className="expand-icon">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
-              <path d="M3 4h18v2H3zm0 7h18v2H3zm0 7h18v2H3z"/>
-            </svg>
           </button>
         </div>
 
