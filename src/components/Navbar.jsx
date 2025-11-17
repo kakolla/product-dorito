@@ -1,0 +1,48 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import './Navbar.css'
+
+function Navbar() {
+  return (
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className="navbar-left">
+          <Link to="/" className="navbar-logo">
+            <div className="logo-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 3h18v18H3z"/>
+              </svg>
+            </div>
+            <span className="logo-text">RIOT GAMES</span>
+          </Link>
+          <button className="expand-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+              <path d="M3 4h18v2H3zm0 7h18v2H3zm0 7h18v2H3z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div className="navbar-center">
+          <Link to="/" className="nav-link">HOME</Link>
+          <Link to="/events" className="nav-link">EVENTS & STANDINGS</Link>
+          <Link to="/power-rankings" className="nav-link">POWER RANKINGS</Link>
+          <Link to="/pick-ems" className="nav-link">PICK EMS</Link>
+          <Link to="/mini-games" className="nav-link active">MINI GAMES</Link>
+          <Link to="/rewards" className="nav-link">REWARDS</Link>
+          <Link to="/news" className="nav-link">NEWS</Link>
+        </div>
+
+        <div className="navbar-right">
+          <button className="language-selector">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            </svg>
+          </button>
+          <button className="login-button">LOGIN</button>
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+export default Navbar
