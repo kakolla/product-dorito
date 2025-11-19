@@ -1,33 +1,64 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Target from './Target'
 
+// target positions - change daily
+const TARGET_POSITIONS = [
+  [-2.4, 1.3, 0],
+  [1.8, -0.9, 0],
+  [-0.5, 1.7, 0],
+  [2.7, 0.4, 0],
+  [-1.2, -1.5, 0],
+  [0.9, 1.1, 0],
+  [-2.9, -0.3, 0],
+  [2.1, -1.8, 0],
+  [0.3, -0.6, 0],
+  [-1.7, 0.8, 0],
+  [2.5, 1.6, 0],
+  [-0.8, -1.2, 0],
+  [1.4, 0.2, 0],
+  [-2.2, 1.9, 0],
+  [0.6, -1.4, 0],
+  [2.9, -0.5, 0],
+  [-1.5, 1.4, 0],
+  [1.1, -1.7, 0],
+  [-0.2, 0.9, 0],
+  [2.3, 1.2, 0],
+  [-2.6, -1.1, 0],
+  [0.8, 1.8, 0],
+  [1.9, -0.2, 0],
+  [-1.0, -0.7, 0],
+  [2.4, 0.6, 0],
+  [-1.8, 1.6, 0],
+  [0.4, -1.9, 0],
+  [2.8, -1.3, 0],
+  [-0.7, 0.5, 0],
+  [1.6, 1.5, 0]
+]
+
 function Game({ onTargetHit, onTargetExpired }) {
   const [targets, setTargets] = useState([])
-  const [nextId, setNextId] = useState(0)
+  const nextIdRef = useRef(0)
+  const positionIndexRef = useRef(0)
   const intervalRef = useRef(null)
   const mountedRef = useRef(true)
 
-  const getRandomPosition = () => {
-    // Generate random position within viewport bounds
-    // Keep targets away from edges
-    const x = (Math.random() - 0.5) * 6 // -3 to 3
-    const y = (Math.random() - 0.5) * 4 // -2 to 2
-    return [x, y, 0]
+  const getNextPosition = () => {
+    const position = TARGET_POSITIONS[positionIndexRef.current % TARGET_POSITIONS.length]
+    positionIndexRef.current = (positionIndexRef.current + 1) % TARGET_POSITIONS.length
+    return position
   }
 
   const spawnTarget = () => {
     if (!mountedRef.current) return
 
-    setNextId(prev => {
-      const id = prev
-      const newTarget = {
-        id,
-        position: getRandomPosition(),
-        spawnTime: Date.now()
-      }
-      setTargets(prevTargets => [...prevTargets, newTarget])
-      return prev + 1
-    })
+    const id = nextIdRef.current
+    const newTarget = {
+      id,
+      position: getNextPosition(),
+      spawnTime: Date.now()
+    }
+    setTargets(prevTargets => [...prevTargets, newTarget])
+    nextIdRef.current += 1
   }
 
   useEffect(() => {
