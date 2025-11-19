@@ -28,9 +28,9 @@ function UI({ score, lives, gameOver, gameStarted, onStart }) {
       {/* Start Screen */}
       {!gameStarted && !gameOver && (
         <div className="menu-screen">
-          <h1 className="title">Aim Reflex MVP (change name)</h1>
+          {/* <h1 className="title"></h1> */}
           <button className="start-button" onClick={onStart}>
-            Play
+            Hop in
           </button>
           <div className="instructions">
           </div>
