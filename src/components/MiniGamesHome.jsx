@@ -9,14 +9,16 @@ function MiniGamesHome() {
       title: 'Aim reflex MVP',
       description: 'Test your aim and reflexes, compared to Esports players',
       image: '/game1.jpg',
-      players: '1.3K'
+      players: '1.3K',
+      route: '/game'
     },
     {
       id: 2,
-      title: 'Riot Esports based Wordle',
-      description: 'Daily Esports Wordle',
+      title: 'Guess the Esports Player',
+      description: 'Who Pulled It Off?',
       image: '/game2.jpg',
-      players: '40K'
+      players: '40K',
+      route: '/guess-player'
     },
     {
       id: 3,
@@ -75,7 +77,7 @@ function MiniGamesHome() {
                       </svg>
                       <span>{game.players}</span>
                     </div>
-                      <Link to="/game" className="play-button">
+                      <Link to={game.route || "/game"} className="play-button">
                         PLAY NOW
                       </Link>
                   </div>

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "videoUrl": "/videos/faker.mp4",
+    "correctPlayer": "Faker",
+    "choices": ["Faker", "Chovy", "Knight", "ShowMaker"],
+    "lore": "A legendary mid-lane outplay known around the world. This iconic play cemented Faker's status as the greatest League of Legends player of all time."
+  },
+  {
+    "id": 2,
+    "videoUrl": "/videos/uzi.mp4",
+    "correctPlayer": "Uzi",
+    "choices": ["Uzi", "Deft", "Ruler", "JackeyLove"],
+    "lore": "One of the most mechanically gifted ADCs in esports history. This play showcased Uzi's incredible positioning and teamfight awareness."
+  },
+  {
+    "id": 3,
+    "videoUrl": "/videos/theshy.mp4",
+    "correctPlayer": "TheShy",
+    "choices": ["TheShy", "Nuguri", "Khan", "369"],
+    "lore": "A top-lane mastermind known for aggressive plays and mechanical outplays. This highlight demonstrates why TheShy is feared in the top lane."
+  },
+  {
+    "id": 4,
+    "videoUrl": "/videos/caps.mp4",
+    "correctPlayer": "Caps",
+    "choices": ["Caps", "Perkz", "Humanoid", "Larssen"],
+    "lore": "The European mid-lane prodigy who brought innovation to the region. This play shows Caps' ability to turn teamfights with creative positioning."
+  },
+  {
+    "id": 5,
+    "videoUrl": "/videos/rookie.mp4",
+    "correctPlayer": "Rookie",
+    "choices": ["Rookie", "Doinb", "Scout", "Xiaohu"],
+    "lore": "A versatile mid-laner with incredible game sense. This highlight captures Rookie's ability to read the game and make game-winning plays."
+  }
+]
+

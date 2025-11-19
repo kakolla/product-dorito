@@ -1,0 +1,73 @@
+.guessOptions {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.prompt {
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+}
+
+.optionsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.optionButton {
+  padding: 20px 24px;
+  background: linear-gradient(180deg, #0d1b2e 0%, #070f1c 100%);
+  border: 2px solid rgba(11, 196, 226, 0.3);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.optionButton:hover:not(:disabled) {
+  background: linear-gradient(180deg, #0f2338 0%, #091420 100%);
+  border-color: rgba(11, 196, 226, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(11, 196, 226, 0.3);
+}
+
+.optionButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.optionButton.selected {
+  background: linear-gradient(180deg, rgba(11, 196, 226, 0.2) 0%, rgba(11, 196, 226, 0.1) 100%);
+  border-color: #0bc4e2;
+  box-shadow: 0 0 20px rgba(11, 196, 226, 0.5);
+}
+
+.optionButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .prompt {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .optionsGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .optionButton {
+    padding: 16px 20px;
+    font-size: 16px;
+  }
+}
+
