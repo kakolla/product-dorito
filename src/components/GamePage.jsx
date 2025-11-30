@@ -1,13 +1,33 @@
-import React, { useState, useRef } from 'react'
+import { useState, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Link } from 'react-router-dom'
 import Game from './Game'
 import UI from './UI'
 import './GamePage.css'
 
+// Component to handle click events inside the Canvas
+function ClickHandler({ onCanvasClick, enabled }) {
+  const handleClick = () => {
+    if (!enabled) return
+    onCanvasClick()
+  }
+
+  return (
+    <mesh
+      position={[0, 0, -10]}
+      onClick={handleClick}
+      visible={false}
+    >
+      <planeGeometry args={[1000, 1000]} />
+      <meshBasicMaterial transparent opacity={0} />
+    </mesh>
+  )
+}
+
 function GamePage() {
   const [score, setScore] = useState(0)
   const [lives, setLives] = useState(10)
+  const [targetsDestroyed, setTargetsDestroyed] = useState(0)
   const [gameOver, setGameOver] = useState(false)
   const [gameStarted, setGameStarted] = useState(false)
   const canvasRef = useRef()
@@ -15,15 +35,17 @@ function GamePage() {
   const startGame = () => {
     setScore(0)
     setLives(10)
+    setTargetsDestroyed(0)
     setGameOver(false)
     setGameStarted(true)
   }
 
   const handleTargetHit = (points) => {
     setScore(prev => prev + points)
+    setTargetsDestroyed(prev => prev + 1)
   }
 
-  const handleMiss = () => {
+  const handleTargetExpired = () => {
     setLives(prev => {
       const newLives = prev - 1
       if (newLives <= 0) {
@@ -34,8 +56,17 @@ function GamePage() {
     })
   }
 
-  const handleTargetExpired = () => {
-    handleMiss()
+  const handleGameComplete = () => {
+    // Game completed - all 10 targets done
+    setGameOver(true)
+    setGameStarted(false)
+  }
+
+  const handleCanvasClick = () => {
+    // Shoot projectile in the current aim direction
+    if (window.__gameShootProjectile) {
+      window.__gameShootProjectile()
+    }
   }
 
   return (
@@ -52,6 +83,7 @@ function GamePage() {
         <UI
           score={score}
           lives={lives}
+          targetsDestroyed={targetsDestroyed}
           gameOver={gameOver}
           gameStarted={gameStarted}
           onStart={startGame}
@@ -60,14 +92,20 @@ function GamePage() {
           ref={canvasRef}
           camera={{ position: [0, 0, 5], fov: 75 }}
           gl={{ alpha: false }}
-          onPointerMissed={gameStarted && !gameOver ? handleMiss : undefined}
         >
           <color attach="background" args={['#0f1923']} />
           {gameStarted && !gameOver && (
-            <Game
-              onTargetHit={handleTargetHit}
-              onTargetExpired={handleTargetExpired}
-            />
+            <>
+              <Game
+                onTargetHit={handleTargetHit}
+                onTargetExpired={handleTargetExpired}
+                onGameComplete={handleGameComplete}
+              />
+              <ClickHandler
+                onCanvasClick={handleCanvasClick}
+                enabled={gameStarted && !gameOver}
+              />
+            </>
           )}
         </Canvas>
       </div>

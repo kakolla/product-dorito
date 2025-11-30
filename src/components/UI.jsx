@@ -1,7 +1,7 @@
 import React from 'react'
 import './UI.css'
 
-function UI({ score, lives, gameOver, gameStarted, onStart }) {
+function UI({ score, gameOver, gameStarted, onStart, targetsDestroyed }) {
   return (
     <div className="ui-overlay">
       {/* HUD - Only show during gameplay */}
@@ -11,16 +11,9 @@ function UI({ score, lives, gameOver, gameStarted, onStart }) {
             <div className="label">SCORE</div>
             <div className="value">{score}</div>
           </div>
-          <div className="lives-display">
-            <div className="label">LIVES</div>
-            <div className="lives-container">
-              {Array.from({ length: 10 }).map((_, i) => (
-                <div
-                  key={i}
-                  className={`life-dot ${i < lives ? 'active' : 'lost'}`}
-                />
-              ))}
-            </div>
+          <div className="targets-display">
+            <div className="label">TARGETS</div>
+            <div className="value">{targetsDestroyed}/6</div>
           </div>
         </div>
       )}

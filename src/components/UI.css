@@ -22,7 +22,8 @@
 }
 
 .score-display,
-.lives-display {
+.lives-display,
+.targets-display {
   background: rgba(0, 0, 0, 0.7);
   padding: 15px 25px;
   border-radius: 5px;
