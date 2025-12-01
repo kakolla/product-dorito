@@ -67,11 +67,19 @@
   font-size: 56px;
   font-weight: 700;
   color: #00C8C9;
-  margin-bottom: 64px;
+  margin-bottom: 16px;
   text-transform: uppercase;
   letter-spacing: 4px;
   font-style: italic;
   text-shadow: 0 0 40px rgba(200, 170, 110, 0.3);
+}
+
+.select-subtitle {
+  font-size: 18px;
+  color: #A09B8C;
+  margin-bottom: 48px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .champions-grid {
@@ -115,6 +123,39 @@
   transform: translateY(-8px);
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
   background: linear-gradient(to bottom, rgba(1, 10, 19, 1) 0%, rgba(20, 30, 50, 0.98) 100%);
+}
+
+.champion-card.selected {
+  border-color: #00C8C9;
+  background: linear-gradient(to bottom, rgba(0, 200, 201, 0.15) 0%, rgba(20, 30, 50, 0.98) 100%);
+  box-shadow: 0 8px 32px rgba(0, 200, 201, 0.4);
+}
+
+.champion-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.champion-card.disabled:hover {
+  transform: none;
+  border-color: #1E2328;
+  box-shadow: none;
+}
+
+.selection-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #00C8C9;
+  color: #0A1428;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .champion-name {
@@ -288,9 +329,14 @@
   transform: translateX(-50%);
 }
 
+.abilities-hud-container {
+  display: flex;
+  gap: 16px;
+}
+
 .ability-hud {
   background: rgba(1, 10, 19, 0.8);
-  padding: 16px 40px;
+  padding: 12px 32px;
   border: 1px solid #1E2328;
   border-top: 2px solid #00C8C9;
   text-align: center;

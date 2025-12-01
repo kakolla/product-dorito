@@ -103,7 +103,7 @@ function Telegraph({ position, spawnTime, onExplode, id, radius }) {
 
 // Player component with movement and highlight mechanics
 function Player({
-  highlight,
+  highlights,
   onDeath,
   playerPosRef,
   playerDirRef,
@@ -115,12 +115,14 @@ function Player({
   const meshRef = useRef()
   const stillTimeRef = useRef(0) // Track time standing still for Zeka
 
+  const hasHighlight = (highlightId) => highlights.includes(highlightId)
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       const key = e.key.toLowerCase()
 
       // Handle Zeka's Limit Break activation
-      if (highlight === 'zeka' && key === 'q' && highlightStateRef.current.zeka.primed) {
+      if (hasHighlight('zeka') && key === 'q' && highlightStateRef.current.zeka.primed) {
         onHighlightUse('zeka')
       }
     }
@@ -130,7 +132,7 @@ function Player({
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [highlight, onHighlightUse, highlightStateRef])
+  }, [highlights, onHighlightUse, highlightStateRef])
 
   useFrame((state, delta) => {
     if (!meshRef.current) return
@@ -146,7 +148,7 @@ function Player({
     const distance = Math.sqrt(dx * dx + dy * dy)
 
     // Track standing still time for Zeka's Limit Break
-    if (highlight === 'zeka') {
+    if (hasHighlight('zeka')) {
       if (distance < 0.05) {
         stillTimeRef.current += delta
         if (stillTimeRef.current >= 0.4 && !highlightStateRef.current.zeka.primed) {
@@ -190,24 +192,24 @@ function Player({
     }
   })
 
-  // Highlight colors
-  const colors = {
-    praygorilla: '#FF6B6B', // ROX Tigers red
-    ambition: '#FFD700',     // Samsung Gold
-    theshy: '#000000',       // Invictus Gaming black
-    zeka: '#4169E1',         // DRX blue
-    ruler: '#FFD700'         // Gen.G gold
-  }
+  // Use primary highlight color or default
+  const playerColor = highlights.length > 0 ? (
+    highlights[0] === 'praygorilla' ? '#FF6B6B' :
+    highlights[0] === 'ambition' ? '#FFD700' :
+    highlights[0] === 'theshy' ? '#FFFFFF' :
+    highlights[0] === 'zeka' ? '#4169E1' :
+    highlights[0] === 'ruler' ? '#FFD700' : '#00C8C9'
+  ) : '#00C8C9'
 
   return (
     <>
       <mesh ref={meshRef} position={[0, 0, 0.1]}>
         <circleGeometry args={[0.15, 32]} />
-        <meshBasicMaterial color={colors[highlight]} transparent />
+        <meshBasicMaterial color={playerColor} transparent />
       </mesh>
 
       {/* Zeka primed indicator */}
-      {highlight === 'zeka' && highlightStateRef.current?.zeka?.primed && (
+      {hasHighlight('zeka') && highlightStateRef.current?.zeka?.primed && (
         <mesh position={[playerPosRef.current.x, playerPosRef.current.y, 0.11]}>
           <ringGeometry args={[0.18, 0.22, 32]} />
           <meshBasicMaterial color="#4169E1" transparent opacity={0.8} />
@@ -218,7 +220,7 @@ function Player({
 }
 
 // Main game component
-function ReactionDash({ highlight, onGameOver, onScoreUpdate }) {
+function ReactionDash({ highlights, onGameOver, onScoreUpdate }) {
   const [telegraphs, setTelegraphs] = useState([])
   const nextTelegraphId = useRef(0)
   const lastSpawnTime = useRef(0)
@@ -243,6 +245,9 @@ function ReactionDash({ highlight, onGameOver, onScoreUpdate }) {
     zeka: { primed: false }, // Active ability
     ruler: {} // Passive - handled in collision
   })
+
+  // Helper to check if a highlight is active
+  const hasHighlight = (highlightId) => highlights.includes(highlightId)
 
   // Handle mouse clicks for movement
   const handleClick = (event) => {
@@ -354,13 +359,13 @@ function ReactionDash({ highlight, onGameOver, onScoreUpdate }) {
 
     if (dodged) {
       // Narrow dodge detection for Ruler's Last-Shot Instinct
-      if (highlight === 'ruler' && distance <= radius + 0.3 && distance > radius) {
+      if (hasHighlight('ruler') && distance <= radius + 0.3 && distance > radius) {
         // Narrow dodge - give speed spike
         speedBoostRef.current = { active: true, multiplier: 1.8, endsAt: currentTime + 0.2 }
       }
 
       // Ambition's Path to Triumph - first dodge after 5s
-      if (highlight === 'ambition' && elapsed > 5 && !highlightStateRef.current.ambition.firstDodgeUsed) {
+      if (hasHighlight('ambition') && elapsed > 5 && !highlightStateRef.current.ambition.firstDodgeUsed) {
         speedBoostRef.current = { active: true, multiplier: 1.6, endsAt: currentTime + 0.3 }
         highlightStateRef.current.ambition.firstDodgeUsed = true
       }
@@ -371,7 +376,7 @@ function ReactionDash({ highlight, onGameOver, onScoreUpdate }) {
       let isProtected = false
 
       // Pray & GorillA Miracle Hold - grace period on direct spawns
-      if (highlight === 'praygorilla') {
+      if (hasHighlight('praygorilla')) {
         const timeSinceSpawn = currentTime - spawnTime
         if (timeSinceSpawn <= 0.15) {
           isProtected = true
@@ -379,7 +384,7 @@ function ReactionDash({ highlight, onGameOver, onScoreUpdate }) {
       }
 
       // TheShy Fearless Engage - recoil dash when touching edge
-      if (highlight === 'theshy' && distance <= radius && distance > radius - 0.2) {
+      if (hasHighlight('theshy') && distance <= radius && distance > radius - 0.2) {
         // Apply recoil dash away from telegraph
         const recoilX = playerPosRef.current.x - position[0]
         const recoilY = playerPosRef.current.y - position[1]
@@ -444,7 +449,7 @@ function ReactionDash({ highlight, onGameOver, onScoreUpdate }) {
       </lineSegments>
 
       <Player
-        highlight={highlight}
+        highlights={highlights}
         playerPosRef={playerPosRef}
         targetPosRef={targetPosRef}
         playerDirRef={playerDirRef}

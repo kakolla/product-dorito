@@ -5,7 +5,7 @@ import ReactionDash from './ReactionDash'
 import './ReactionDashPage.css'
 
 function ReactionDashPage() {
-  const [selectedHighlight, setSelectedHighlight] = useState(null)
+  const [selectedHighlights, setSelectedHighlights] = useState([])
   const [gameStarted, setGameStarted] = useState(false)
   const [gameOver, setGameOver] = useState(false)
   const [score, setScore] = useState({ time: 0, dodges: 0 })
@@ -56,11 +56,21 @@ function ReactionDashPage() {
   ]
 
   const handleHighlightSelect = (highlightId) => {
-    setSelectedHighlight(highlightId)
+    setSelectedHighlights(prev => {
+      // Toggle selection
+      if (prev.includes(highlightId)) {
+        return prev.filter(id => id !== highlightId)
+      }
+      // Max 3 selections
+      if (prev.length >= 3) {
+        return prev
+      }
+      return [...prev, highlightId]
+    })
   }
 
   const handleStartGame = () => {
-    if (!selectedHighlight) return
+    if (selectedHighlights.length === 0) return
     setGameStarted(true)
     setGameOver(false)
     setScore({ time: 0, dodges: 0 })
@@ -80,7 +90,7 @@ function ReactionDashPage() {
   }
 
   const handleBackToSelect = () => {
-    setSelectedHighlight(null)
+    setSelectedHighlights([])
     setGameStarted(false)
     setGameOver(false)
   }
@@ -98,14 +108,15 @@ function ReactionDashPage() {
 
       <div className="game-container">
         {/* Highlight Select Screen */}
-        {!selectedHighlight && !gameStarted && !gameOver && (
+        {!gameStarted && !gameOver && (
           <div className="champion-select-overlay">
-            <h1 className="select-title">Select Your Worlds Highlight</h1>
+            <h1 className="select-title">Select 3 Worlds Highlights</h1>
+            <p className="select-subtitle">{selectedHighlights.length}/3 Selected</p>
             <div className="champions-grid">
               {highlights.map(highlight => (
                 <div
                   key={highlight.id}
-                  className="champion-card"
+                  className={`champion-card ${selectedHighlights.includes(highlight.id) ? 'selected' : ''} ${selectedHighlights.length >= 3 && !selectedHighlights.includes(highlight.id) ? 'disabled' : ''}`}
                   onClick={() => handleHighlightSelect(highlight.id)}
                 >
                   <div className="champion-name">{highlight.name}</div>
@@ -114,29 +125,17 @@ function ReactionDashPage() {
                     <div className="ability-key">Type: {highlight.type}</div>
                     <div className="ability-desc">{highlight.description}</div>
                   </div>
+                  {selectedHighlights.includes(highlight.id) && (
+                    <div className="selection-badge">{selectedHighlights.indexOf(highlight.id) + 1}</div>
+                  )}
                 </div>
               ))}
             </div>
-          </div>
-        )}
-
-        {/* Pre-game screen (highlight selected but not started) */}
-        {selectedHighlight && !gameStarted && !gameOver && (
-          <div className="pre-game-overlay">
-            <div className="selected-champion-info">
-              <h2>{highlights.find(h => h.id === selectedHighlight)?.name}</h2>
-              <p className="controls-info">{highlights.find(h => h.id === selectedHighlight)?.team} - Worlds {highlights.find(h => h.id === selectedHighlight)?.year}</p>
-              <p className="controls-info">Controls: Click to move</p>
-              <p className="controls-info">
-                {highlights.find(h => h.id === selectedHighlight)?.description}
-              </p>
-            </div>
-            <button className="start-button" onClick={handleStartGame}>
-              Start Game
-            </button>
-            <button className="back-select-button" onClick={handleBackToSelect}>
-              Change Highlight
-            </button>
+            {selectedHighlights.length > 0 && (
+              <button className="start-button" onClick={handleStartGame}>
+                Start Game
+              </button>
+            )}
           </div>
         )}
 
@@ -154,13 +153,16 @@ function ReactionDashPage() {
               </div>
             </div>
             <div className="hud-bottom">
-              <div className="ability-hud">
-                <div className="ability-name">
-                  {highlights.find(h => h.id === selectedHighlight)?.name}
-                </div>
-                <div className="ability-key-hint">
-                  {highlights.find(h => h.id === selectedHighlight)?.type}
-                </div>
+              <div className="abilities-hud-container">
+                {selectedHighlights.map(highlightId => {
+                  const highlight = highlights.find(h => h.id === highlightId)
+                  return (
+                    <div key={highlightId} className="ability-hud">
+                      <div className="ability-name">{highlight?.name}</div>
+                      <div className="ability-key-hint">{highlight?.type}</div>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>
@@ -201,9 +203,9 @@ function ReactionDashPage() {
           gl={{ alpha: false }}
         >
           <color attach="background" args={['#0a1428']} />
-          {gameStarted && !gameOver && selectedHighlight && (
+          {gameStarted && !gameOver && selectedHighlights.length > 0 && (
             <ReactionDash
-              highlight={selectedHighlight}
+              highlights={selectedHighlights}
               onGameOver={handleGameOver}
               onScoreUpdate={handleScoreUpdate}
             />
