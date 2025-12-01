@@ -6,7 +6,7 @@ function MiniGamesHome() {
   const games = [
     {
       id: 1,
-      title: 'Reflex Aim Shot',
+      title: 'Shooting Range',
       description: 'Test your aim and reflexes, compared to Esports players',
       image: '/game1.jpg',
       players: '1.3K',
@@ -14,15 +14,15 @@ function MiniGamesHome() {
     },
     {
       id: 2,
-      title: 'Teemo Jump',
-      description: 'Jump as high as you can! Avoid the blasts.',
+      title: "Climbing Summoner's Rift",
+      description: 'Jump as high as you can. Avoid the blasts.',
       image: '/platformer_game_assets/teemo.png',
       players: '40K',
       route: '/guess-player'
     },
     {
       id: 3,
-      title: 'Range indicator Dash',
+      title: 'Dash',
       description: 'Dodge enemy range indicators and survive',
       image: '/game3.jpg',
       players: '2.5K',
@@ -96,16 +96,16 @@ function MiniGamesHome() {
           <div className="leaderboard-grid">
             <div className="leaderboard-card">
               <div className="leaderboard-header">
-                <h3>Dorito MVP</h3>
+                <h3>Shooting Range</h3>
                 <Link to="/leaderboard" className="view-all">View All →</Link>
               </div>
               <div className="leaderboard-list">
                 {[
-                  { rank: 1, name: 'Player1', score: '15,420' },
-                  { rank: 2, name: 'Player2', score: '14,880' },
-                  { rank: 3, name: 'Player3', score: '13,950' },
-                  { rank: 4, name: 'Player4', score: '12,670' },
-                  { rank: 5, name: 'Player5', score: '11,920' }
+                  { rank: 1, name: 'Faker', score: '505' },
+                  { rank: 2, name: 'ILiketomato', score: '503' },
+                  { rank: 3, name: 'T1onTop', score: '498' },
+                  { rank: 4, name: 'RiotM', score: '497' },
+                  { rank: 5, name: 'You', score: '497' }
                 ].map(player => (
                   <div key={player.rank} className="leaderboard-item">
                     <div className="player-rank">{player.rank}</div>
@@ -116,21 +116,47 @@ function MiniGamesHome() {
               </div>
             </div>
 
-            <div className="leaderboard-card coming-soon">
+            <div className="leaderboard-card">
               <div className="leaderboard-header">
-                <h3>Coming Soon</h3>
+                <h3>Climbing Summoner's Rift</h3>
+                <Link to="/leaderboard" className="view-all">View All →</Link>
               </div>
-              <div className="coming-soon-content">
-                <p>coming soon</p>
+              <div className="leaderboard-list">
+                {[
+                  { rank: 1, name: 'Faker', score: '998' },
+                  { rank: 2, name: 'Chovy', score: '950' },
+                  { rank: 3, name: 'Caps', score: '925' },
+                  { rank: 4, name: 'ShowMaker', score: '890' },
+                  { rank: 5, name: 'Knight', score: '850' }
+                ].map(player => (
+                  <div key={player.rank} className="leaderboard-item">
+                    <div className="player-rank">{player.rank}</div>
+                    <div className="player-name">{player.name}</div>
+                    <div className="player-score">{player.score}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="leaderboard-card coming-soon">
+            <div className="leaderboard-card">
               <div className="leaderboard-header">
-                <h3>Coming Soon</h3>
+                <h3>Dash</h3>
+                <Link to="/leaderboard" className="view-all">View All →</Link>
               </div>
-              <div className="coming-soon-content">
-                <p>coming soon</p>
+              <div className="leaderboard-list">
+                {[
+                  { rank: 1, name: 'Keria', score: '350' },
+                  { rank: 2, name: 'Gumayusi', score: '342' },
+                  { rank: 3, name: 'Ruler', score: '335' },
+                  { rank: 4, name: 'Viper', score: '320' },
+                  { rank: 5, name: 'Deft', score: '310' }
+                ].map(player => (
+                  <div key={player.rank} className="leaderboard-item">
+                    <div className="player-rank">{player.rank}</div>
+                    <div className="player-name">{player.name}</div>
+                    <div className="player-score">{player.score}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
