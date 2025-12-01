@@ -12,6 +12,7 @@ const SPLIT_LENGTH_PERCENT = 0.3 // Split branches are 30% of main trajectory le
 // Component to show the reticle at anchor point with texture
 function ReticleWithTexture({ rotation }) {
   const texture = useTexture('/target_aim_band.png')
+  const starTexture = useTexture('/star.png')
   const groupRef = useRef()
 
   useFrame(() => {
@@ -24,6 +25,10 @@ function ReticleWithTexture({ rotation }) {
   // Offset the mesh by half its height (0.6) so bottom edge is at anchor
   return (
     <group ref={groupRef} position={ANCHOR_POINT}>
+      {/* Star at origin (game anchor) */}
+      <sprite position={[0, 0, 0]} scale={[0.6, 0.6, 0.6]}>
+        <spriteMaterial map={starTexture} transparent />
+      </sprite>
       <mesh position={[0, 0.6, 0]}>
         <planeGeometry args={[1.2, 1.2]} />
         <meshBasicMaterial map={texture} transparent opacity={0.9} side={THREE.DoubleSide} />
