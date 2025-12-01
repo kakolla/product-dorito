@@ -38,7 +38,7 @@ function MiniGamesHome() {
           <div className="hero-subtitle">WORLDS 2025</div>
           <h1 className="hero-title">MINI GAMES</h1>
           <p className="hero-description">
-            Climb up the Leaderboards / Earn Rewards
+            Test your skill / Climb up the Leaderboards 
           </p>
         </div>
         <div className="hero-gradient"></div>
@@ -79,7 +79,7 @@ function MiniGamesHome() {
                       <span>{game.players}</span>
                     </div>
                     <Link to={game.route || "/game"} className="play-button">
-                      PLAY NOW
+                      Play
                     </Link>
                   </div>
                 </div>
@@ -163,21 +163,6 @@ function MiniGamesHome() {
         </div>
       </section>
 
-      {/* rewards area */}
-      <section className="rewards-section">
-        <div className="section-container">
-          <h2 className="section-title">EARN REWARDS</h2>
-          <div className="rewards-content">
-            <p className="rewards-description">
-              Compete in mini games to earn exclusive rewards and climb the leaderboards.
-              Prove you're the best and claim your place among the champions!
-            </p>
-            <Link to="/rewards" className="rewards-button">
-              VIEW REWARDS
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

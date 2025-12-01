@@ -320,7 +320,7 @@ const PlatformerGame = () => {
 
         {gameState === 'START' && (
           <div className="overlay start-screen">
-            <h1>Ahri Jump</h1>
+            <h1>Climbing Summoner's Rift</h1>
             <p>Use Left/Right to move, Up to jump</p>
             <button onClick={initGame}>Start Game</button>
           </div>
