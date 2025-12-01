@@ -173,8 +173,12 @@ function ReactionDashPage() {
               <h1 className="game-over-title">Game Over</h1>
               <div className="final-stats">
                 <div className="final-stat">
-                  <div className="stat-label">Survived</div>
-                  <div className="stat-value">{score.time.toFixed(2)}s</div>
+                  <div className="stat-label">Score</div>
+                  <div className="stat-value">{Math.floor(score.time * 10 + score.dodges * 5)}</div>
+                </div>
+                <div className="final-stat">
+                  <div className="stat-label">Time</div>
+                  <div className="stat-value">{score.time.toFixed(1)}s</div>
                 </div>
                 <div className="final-stat">
                   <div className="stat-label">Dodges</div>

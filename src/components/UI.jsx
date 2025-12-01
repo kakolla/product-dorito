@@ -4,19 +4,7 @@ import './UI.css'
 function UI({ score, gameOver, gameStarted, onStart, targetsDestroyed }) {
   return (
     <div className="ui-overlay">
-      {/* HUD - Only show during gameplay */}
-      {gameStarted && !gameOver && (
-        <div className="hud">
-          <div className="score-display">
-            <div className="label">SCORE</div>
-            <div className="value">{score}</div>
-          </div>
-          <div className="targets-display">
-            <div className="label">TARGETS</div>
-            <div className="value">{targetsDestroyed}/6</div>
-          </div>
-        </div>
-      )}
+      {/* HUD - Hidden during gameplay, only shows on game over */}
 
       {/* Start Screen */}
       {!gameStarted && !gameOver && (
