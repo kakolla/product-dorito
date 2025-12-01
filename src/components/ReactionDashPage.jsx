@@ -18,8 +18,9 @@ function ReactionDashPage() {
       name: 'Miracle Hold',
       team: 'ROX Tigers',
       year: '2016',
-      description: '0.15s grace period on direct spawns',
-      type: 'Passive'
+      description: 'If a telegraph spawns on top of you, you get a 0.15s grace period before it counts as a hit.',
+      type: 'Passive',
+      image: '/Highlight_Team_Boxes/ROX_esports.png'
     },
     {
       id: 'ambition',
@@ -27,7 +28,8 @@ function ReactionDashPage() {
       team: 'Samsung Galaxy',
       year: '2017',
       description: 'First dodge after 5s: 0.3s speed burst',
-      type: 'Auto-Trigger'
+      type: 'Auto-Trigger',
+      image: '/Highlight_Team_Boxes/Samsung_Galaxy.png'
     },
     {
       id: 'theshy',
@@ -35,7 +37,8 @@ function ReactionDashPage() {
       team: 'Invictus Gaming',
       year: '2018',
       description: 'Telegraph edge touch: recoil dash',
-      type: 'Passive'
+      type: 'Passive',
+      image: '/Highlight_Team_Boxes/Invictus_Gaming.png'
     },
     {
       id: 'zeka',
@@ -43,7 +46,8 @@ function ReactionDashPage() {
       team: 'DRX',
       year: '2022',
       description: 'Stand still 0.4s to prime burst (Q)',
-      type: 'Active'
+      type: 'Active',
+      image: '/Highlight_Team_Boxes/DRX.png'
     },
     {
       id: 'ruler',
@@ -51,7 +55,8 @@ function ReactionDashPage() {
       team: 'Gen.G',
       year: '2023',
       description: 'Narrow dodge: 0.2s speed spike',
-      type: 'Passive'
+      type: 'Passive',
+      image: '/Highlight_Team_Boxes/Gen_g.png'
     }
   ]
 
@@ -110,31 +115,46 @@ function ReactionDashPage() {
         {/* Highlight Select Screen */}
         {!gameStarted && !gameOver && (
           <div className="champion-select-overlay">
-            <h1 className="select-title">Select 3 Worlds Highlights</h1>
-            <p className="select-subtitle">{selectedHighlights.length}/3 Selected</p>
+            <img src="/Pick_3_items.png" alt="Pick 3 Items" className="pick-3-title" />
             <div className="champions-grid">
               {highlights.map(highlight => (
                 <div
                   key={highlight.id}
-                  className={`champion-card ${selectedHighlights.includes(highlight.id) ? 'selected' : ''} ${selectedHighlights.length >= 3 && !selectedHighlights.includes(highlight.id) ? 'disabled' : ''}`}
+                  className={`champion-card-image ${selectedHighlights.includes(highlight.id) ? 'selected' : ''} ${selectedHighlights.length >= 3 && !selectedHighlights.includes(highlight.id) ? 'disabled' : ''}`}
                   onClick={() => handleHighlightSelect(highlight.id)}
                 >
-                  <div className="champion-name">{highlight.name}</div>
-                  <div className="champion-ability">
-                    <div className="ability-name">{highlight.team} {highlight.year}</div>
-                    <div className="ability-key">Type: {highlight.type}</div>
-                    <div className="ability-desc">{highlight.description}</div>
-                  </div>
+                  <img src={highlight.image} alt={highlight.name} className="team-logo" />
                   {selectedHighlights.includes(highlight.id) && (
                     <div className="selection-badge">{selectedHighlights.indexOf(highlight.id) + 1}</div>
                   )}
+                  <div className="highlight-info-tooltip">
+                    <div className="tooltip-title">{highlight.name.toUpperCase()}</div>
+                    <div className="tooltip-subtitle">({highlight.team} {highlight.year})</div>
+                    <div className="tooltip-description">{highlight.description}</div>
+                  </div>
                 </div>
               ))}
             </div>
             {selectedHighlights.length > 0 && (
-              <button className="start-button" onClick={handleStartGame}>
-                Start Game
-              </button>
+              <>
+                <div className="selected-abilities-display">
+                  {selectedHighlights.map((highlightId, index) => {
+                    const highlight = highlights.find(h => h.id === highlightId)
+                    return (
+                      <div key={highlightId} className="selected-ability-item">
+                        <div className="ability-number">{index + 1}</div>
+                        <div className="ability-details">
+                          <div className="ability-item-name">{highlight?.name}</div>
+                          <div className="ability-item-desc">{highlight?.description}</div>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+                <button className="start-button" onClick={handleStartGame}>
+                  Start Game
+                </button>
+              </>
             )}
           </div>
         )}
