@@ -8,7 +8,7 @@ function MiniGamesHome() {
       id: 1,
       title: 'Shooting Range',
       description: 'Test your aim and reflexes, compared to Esports players',
-      image: '/game1.jpg',
+      image: '/game1.png',
       players: '1.3K',
       route: '/game'
     },
@@ -16,7 +16,7 @@ function MiniGamesHome() {
       id: 2,
       title: "Climbing Summoner's Rift",
       description: 'Jump as high as you can. Avoid the blasts.',
-      image: '/platformer_game_assets/teemo.png',
+      image: '/game2.png',
       players: '40K',
       route: '/guess-player'
     },
@@ -24,7 +24,7 @@ function MiniGamesHome() {
       id: 3,
       title: 'Dash',
       description: 'Dodge enemy range indicators and survive',
-      image: '/game3.jpg',
+      image: '/game3.png',
       players: '2.5K',
       route: '/reaction-dash'
     }
@@ -38,7 +38,7 @@ function MiniGamesHome() {
           <div className="hero-subtitle">WORLDS 2025</div>
           <h1 className="hero-title">MINI GAMES</h1>
           <p className="hero-description">
-            Test your skill / Climb up the Leaderboards 
+            Test your skill / Climb up the Leaderboards
           </p>
         </div>
         <div className="hero-gradient"></div>
@@ -51,6 +51,7 @@ function MiniGamesHome() {
             {games.map(game => (
               <div key={game.id} className="game-card">
                 <div className="game-card-image">
+                  <img src={game.image} alt={game.title} className="game-bg-image" />
                   <div className="game-placeholder">
                     <svg viewBox="0 0 24 24" fill="currentColor" width="64" height="64">
                       <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z" />
