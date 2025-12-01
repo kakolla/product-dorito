@@ -31,7 +31,36 @@ function MiniGamesHome() {
   ]
 
   return (
-    <div className="mini-games-home">
+    <div className="minigames-container">
+      {/* Live Match Banner */}
+      <div className="live-match-banner">
+        <div className="match-content">
+          <div className="play-button-wrapper">
+            <div className="play-text">WATCH NOW</div>
+          </div>
+
+          <div className="teams-container">
+            <span className="team-name">GEN</span>
+            <img src="/Highlight_Team_Boxes/Gen_g.png" alt="Gen.G" className="team-logo-small" />
+
+            <div className="match-score-hidden">
+              <span className="hidden-icon">3 / 1</span>
+            </div>
+
+            <img src="/Highlight_Team_Boxes/DRX.png" alt="DRX" className="team-logo-small" />
+            <span className="team-name">DRX</span>
+          </div>
+        </div>
+
+        <div className="match-footer">
+          <div className="league-icon">
+            <img src="/riot.png" alt="Worlds" />
+          </div>
+          <span className="match-info">Worlds • Quarterfinals</span>
+          <span className="match-format">Bo5</span>
+        </div>
+      </div>
+
       {/* main section */}
       <section className="hero-section">
         <div className="hero-content">

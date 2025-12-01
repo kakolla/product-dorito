@@ -9,6 +9,144 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
 }
 
+/* Live Match Banner */
+.live-match-banner {
+  background-color: #111;
+  border-bottom: 1px solid #333;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  /* Remove max-width */
+  margin: 0;
+  /* Remove auto margin and specific top/bottom margins */
+  margin-top: 80px;
+  /* Push down to clear navbar */
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: 0;
+  /* Remove border radius */
+  /* Overlap with hero slightly or just sit on top */
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.match-content {
+  display: flex;
+  flex-direction: column;
+  /* Stack vertically */
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  background-color: #1a1a1a;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  gap: 10px;
+  /* Reduced gap for vertical stack */
+}
+
+.play-button-wrapper {
+  order: 2;
+  /* Move button below teams */
+  width: auto;
+  padding: 0 15px;
+  background-color: #10C4E2;
+  height: 30px;
+  /* background-color: #2a2a2a; */
+  border: 1px solid #444;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.play-button-wrapper:hover {
+  background-color: #3a3a3a;
+}
+
+.play-text {
+  /* color: #10C4E2; */
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.play-icon {
+  color: #fff;
+  font-size: 12px;
+}
+
+.teams-container {
+  order: 1;
+  /* Keep teams on top */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.team-name {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.team-logo-small {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.match-score-hidden {
+  width: 40px;
+  height: 30px;
+  background-color: #2a2a2a;
+  border: 1px solid #444;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden-icon {
+  color: #fff;
+  font-size: 14px;
+}
+
+.match-footer {
+  background-color: #111;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #2a2a2a;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  font-size: 12px;
+  color: #888;
+}
+
+.league-icon img {
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  opacity: 0.7;
+}
+
+.match-info {
+  font-weight: 600;
+  color: #aaa;
+}
+
+.match-format {
+  margin-left: auto;
+  color: #666;
+}
+
 /* Hero Section */
 .hero-section {
   position: relative;
