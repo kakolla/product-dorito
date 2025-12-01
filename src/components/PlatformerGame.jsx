@@ -302,13 +302,7 @@ const PlatformerGame = () => {
 
   return (
     <div className="platformer-container">
-      <div className="game-header">
-        <Link to="/mini-games" className="back-button">← Back</Link>
-        <div className="score-board">
-          <span>Score: {score}</span>
-          <span>High Score: {highScore}</span>
-        </div>
-      </div>
+
 
       <div className="canvas-wrapper">
         <canvas
