@@ -6,7 +6,7 @@ function MiniGamesHome() {
   const games = [
     {
       id: 1,
-      title: 'Aim reflex MVP',
+      title: 'Reflex Aim Shot',
       description: 'Test your aim and reflexes, compared to Esports players',
       image: '/game1.jpg',
       players: '1.3K',
@@ -22,10 +22,11 @@ function MiniGamesHome() {
     },
     {
       id: 3,
-      title: 'Coming Soon',
-      description: 'Coming soon',
+      title: 'Range indicator Dash',
+      description: 'Dodge enemy range indicators and survive',
       image: '/game3.jpg',
-      players: '9'
+      players: '2.5K',
+      route: '/reaction-dash'
     }
   ]
 
